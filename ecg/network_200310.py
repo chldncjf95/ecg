@@ -72,7 +72,7 @@ def build_network(**params):
     # 4th resnet layer (number of filters = 64, subsampling = 1, zero-pad)
     #layer = resnet_block(layer, 64, 1, 4, **params)
     shortcut_4 = MaxPooling1D(pool_size=1)(layer)
-    shortcut_4 = Lambda(zeropad, output_shape=zeropad_output_shape)(shortcut)
+    shortcut_4 = Lambda(zeropad, output_shape=zeropad_output_shape)(shortcut_4)
     layer = BatchNormalization()(layer)
     layer = Activation('relu')(layer)
     layer = Conv1D(filters=64, kernel_size=16, strides=1, padding='same', kernel_initializer='he_normal')(layer)
@@ -117,7 +117,7 @@ def build_network(**params):
     
     # 8th resnet layer (number of filters = 128, subsampling = 1, zero-pad)
     shortcut_8 = MaxPooling1D(pool_size=1)(layer)
-    shortcut_8 = Lambda(zeropad, output_shape=zeropad_output_shape)(shortcut)
+    shortcut_8 = Lambda(zeropad, output_shape=zeropad_output_shape)(shortcut_8)
     layer = BatchNormalization()(layer)
     layer = Activation('relu')(layer)
     layer = Conv1D(filters=128, kernel_size=16, strides=1, padding='same', kernel_initializer='he_normal')(layer)
@@ -162,7 +162,7 @@ def build_network(**params):
 
     # 12th resnet layer (number of filters = 256, subsampling = 1, zero-pad)
     shortcut_12 = MaxPooling1D(pool_size=1)(layer)
-    shortcut_12 = Lambda(zeropad, output_shape=zeropad_output_shape)(shortcut)
+    shortcut_12 = Lambda(zeropad, output_shape=zeropad_output_shape)(shortcut_12)
     layer = BatchNormalization()(layer)
     layer = Activation('relu')(layer)
     layer = Conv1D(filters=256, kernel_size=16, strides=1, padding='same', kernel_initializer='he_normal')(layer)

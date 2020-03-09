@@ -21,7 +21,7 @@ def build_network(**params):
     inputs = Input(shape=[None, 1], dtype='float32', name='inputs')
 
     # 1st Conv layer (number of filters = 32)
-    layer = Conv1D(filters=32, kernel_size=16 , strides=1, padding='same', kernel_initializer='he_normal')(layer)
+    layer = Conv1D(filters=32, kernel_size=16 , strides=1, padding='same', kernel_initializer='he_normal')(inputs)
     layer = BatchNormalization()(layer)
     layer = Activation(params["conv_activation"])(layer)
 

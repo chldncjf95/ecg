@@ -14,7 +14,7 @@ import network
 import load
 import util
 
-MAX_EPOCHS = 100
+MAX_EPOCHS = 1
 
 def make_save_dir(dirname, experiment_name):
     start_time = str(int(time.time())) + '-' + str(random.randrange(1000))

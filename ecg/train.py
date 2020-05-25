@@ -93,4 +93,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
     params = json.load(open(args.config_file, 'r'))
     train(args, params)
-    print('hist.history['loss']')
+    print(hist.history['loss'])

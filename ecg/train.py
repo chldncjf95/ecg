@@ -100,9 +100,11 @@ if __name__ == '__main__':
 
     import scipy.io as sio
     import numpy as np
-    #sio.loadmat
-
-    #arr1 = hist.history['loss']
-
     arr1 = np.array(hist.history['loss'])
-    sio.savemat('data1.mat', {'arr1': arr1})
+    sio.savemat('loss.mat', {'arr1': arr1})
+    arr2 = np.array(hist.history['val_loss'])
+    sio.savemat('val_loss.mat', {'arr1': arr2})
+    arr3 = np.array(hist.history['acc'])
+    sio.savemat('acc.mat', {'arr1': arr3})
+    arr4 = np.array(hist.history['val_acc'])
+    sio.savemat('val_acc.mat', {'arr1': arr4})

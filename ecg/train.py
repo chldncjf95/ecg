@@ -73,9 +73,9 @@ def train(args, params):
             validation_data=dev_gen,
             validation_steps=int(len(dev[0]) / batch_size),
             callbacks=[checkpointer, reduce_lr, stopping])
-        
+
         return hist
-    
+
     else:
         train_x, train_y = preproc.process(*train)
         dev_x, dev_y = preproc.process(*dev)
@@ -86,7 +86,7 @@ def train(args, params):
             validation_data=(dev_x, dev_y),
             callbacks=[checkpointer, reduce_lr, stopping])
         
-         return hist
+        return hist
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -97,3 +97,12 @@ if __name__ == '__main__':
     params = json.load(open(args.config_file, 'r'))
     hist = train(args, params)
     print(hist.history['loss'])
+
+    import scipy.io as sio
+    import numpy as np
+    #sio.loadmat
+
+    #arr1 = hist.history['loss']
+
+    arr1 = np.array(hist.history['loss'])
+    sio.savemat('data1.mat', {'arr1': arr1})

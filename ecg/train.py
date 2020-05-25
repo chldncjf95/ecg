@@ -66,7 +66,7 @@ def train(args, params):
     if params.get("generator", False):
         train_gen = load.data_generator(batch_size, preproc, *train)
         dev_gen = load.data_generator(batch_size, preproc, *dev)
-        model.fit_generator(
+        hist = model.fit_generator(
             train_gen,
             steps_per_epoch=int(len(train[0]) / batch_size),
             epochs=MAX_EPOCHS,
@@ -76,12 +76,14 @@ def train(args, params):
     else:
         train_x, train_y = preproc.process(*train)
         dev_x, dev_y = preproc.process(*dev)
-        model.fit(
+        hist = model.fit(
             train_x, train_y,
             batch_size=batch_size,
             epochs=MAX_EPOCHS,
             validation_data=(dev_x, dev_y),
             callbacks=[checkpointer, reduce_lr, stopping])
+        
+    return hist
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -91,3 +93,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
     params = json.load(open(args.config_file, 'r'))
     train(args, params)
+    print('hist.history['loss']')

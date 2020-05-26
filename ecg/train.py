@@ -96,7 +96,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
     params = json.load(open(args.config_file, 'r'))
     hist = train(args, params)
-    print(hist.history['loss'])
 
     import scipy.io as sio
     import numpy as np

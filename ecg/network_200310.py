@@ -203,6 +203,10 @@ def build_network(**params):
     layer = Conv1D(filters=256, kernel_size=16, strides=1, padding='same', kernel_initializer='he_normal')(layer)
     layer = Add()([shortcut_15, layer])
     
+    
+    #####################################  추가됨  ##########################################
+    
+    '''
     # 16th resnet layer (number of filters = 256, subsampling = 1, zero-pad)
     shortcut_16 = MaxPooling1D(pool_size=1)(layer)
     shortcut_16 = Lambda(zeropad, output_shape=zeropad_output_shape)(shortcut_16)
@@ -247,6 +251,7 @@ def build_network(**params):
     layer = Dropout(0.2)(layer)
     layer = Conv1D(filters=512, kernel_size=16, strides=1, padding='same', kernel_initializer='he_normal')(layer)
     layer = Add()([shortcut_19, layer])
+    '''
 
     layer = BatchNormalization()(layer)
     layer = Activation('relu')(layer)

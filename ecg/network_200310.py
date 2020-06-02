@@ -230,6 +230,16 @@ def build_network(**params):
     layer = Conv1D(filters=512, kernel_size=16, strides=1, padding='same', kernel_initializer='he_normal')(layer)
     layer = Add()([shortcut_17, layer])
     
+    # 18th resnet layer (number of filters = 256, subsampling = 1)
+    shortcut_18 = MaxPooling1D(pool_size=1)(layer)
+    layer = BatchNormalization()(layer)
+    layer = Activation('relu')(layer)
+    layer = Conv1D(filters=512, kernel_size=16, strides=1, padding='same', kernel_initializer='he_normal')(layer)
+    layer = BatchNormalization()(layer)
+    layer = Activation('relu')(layer)
+    layer = Dropout(0.2)(layer)
+    layer = Conv1D(filters=512, kernel_size=16, strides=1, padding='same', kernel_initializer='he_normal')(layer)
+    layer = Add()([shortcut_18, layer])
     
     layer = BatchNormalization()(layer)
     layer = Activation('relu')(layer)

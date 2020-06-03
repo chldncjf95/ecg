@@ -228,7 +228,7 @@ def build_network(**params):
     layer = Activation('relu')(layer)
     layer = Dropout(0.2)(layer)
     layer = Conv1D(filters=512, kernel_size=16, strides=1, padding='same', kernel_initializer='he_normal')(layer)
-    layer = Average()([shortcut_17, layer])
+    layer = Concatenate(axis=-1)([shortcut_17, layer])
     
     
     layer = BatchNormalization()(layer)
